@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifesMoments", "LifesMoment
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifesMoments.Tests", "LifesMoments.Tests\LifesMoments.Tests.csproj", "{EB58855A-A15B-4BF6-B506-B25124C15E3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifesMomentsDB", "LifesMomentsDB\LifesMomentsDB.csproj", "{19CECDCB-5FB0-4889-BCA3-507080454AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EB58855A-A15B-4BF6-B506-B25124C15E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB58855A-A15B-4BF6-B506-B25124C15E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB58855A-A15B-4BF6-B506-B25124C15E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19CECDCB-5FB0-4889-BCA3-507080454AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19CECDCB-5FB0-4889-BCA3-507080454AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19CECDCB-5FB0-4889-BCA3-507080454AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19CECDCB-5FB0-4889-BCA3-507080454AC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
