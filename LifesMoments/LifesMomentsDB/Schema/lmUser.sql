@@ -1,0 +1,12 @@
+USE LifesMomentsDB
+
+GO
+
+CREATE TABLE lmUser
+(
+	userID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	firstName VARCHAR(50) NOT NULL,
+	lastName VARCHAR (50) NOT NULL,
+	emailAddress VARCHAR(100) NOT NULL,
+	userPassword VARCHAR(100) NOT NULL
+)
