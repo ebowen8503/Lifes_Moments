@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LifesMomentsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="lmAlbum">
+    <Key>
+      <PropertyRef Name="albumID" />
+    </Key>
+    <Property Name="albumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="albumDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="albumDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="userIDFK" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="lmUser" Relationship="Self.FK__lmAlbum__userIDF__1DE57479" FromRole="lmAlbum" ToRole="lmUser" />
+    <NavigationProperty Name="lmAlbumItems" Relationship="Self.FK__lmAlbumIt__album__21B6055D" FromRole="lmAlbum" ToRole="lmAlbumItem" />
+  </EntityType>
+  <EntityType Name="lmAlbumItem">
+    <Key>
+      <PropertyRef Name="albumItemID" />
+    </Key>
+    <Property Name="albumItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="albumItemDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="albumItemLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mediaTypeIDFK" Type="Int32" Nullable="false" />
+    <Property Name="albumIDFK" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="lmAlbum" Relationship="Self.FK__lmAlbumIt__album__21B6055D" FromRole="lmAlbumItem" ToRole="lmAlbum" />
+    <NavigationProperty Name="lmMediaType" Relationship="Self.FK__lmAlbumIt__media__20C1E124" FromRole="lmAlbumItem" ToRole="lmMediaType" />
+  </EntityType>
+  <EntityType Name="lmMediaType">
+    <Key>
+      <PropertyRef Name="mediaTypeID" />
+    </Key>
+    <Property Name="mediaTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mediaTypeDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="lmAlbumItems" Relationship="Self.FK__lmAlbumIt__media__20C1E124" FromRole="lmMediaType" ToRole="lmAlbumItem" />
+  </EntityType>
+  <EntityType Name="lmUser">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="emailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="lmAlbums" Relationship="Self.FK__lmAlbum__userIDF__1DE57479" FromRole="lmUser" ToRole="lmAlbum" />
+  </EntityType>
+  <Association Name="FK__lmAlbum__userIDF__1DE57479">
+    <End Role="lmUser" Type="Self.lmUser" Multiplicity="1" />
+    <End Role="lmAlbum" Type="Self.lmAlbum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmUser">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="lmAlbum">
+        <PropertyRef Name="userIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lmAlbumIt__album__21B6055D">
+    <End Role="lmAlbum" Type="Self.lmAlbum" Multiplicity="1" />
+    <End Role="lmAlbumItem" Type="Self.lmAlbumItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmAlbum">
+        <PropertyRef Name="albumID" />
+      </Principal>
+      <Dependent Role="lmAlbumItem">
+        <PropertyRef Name="albumIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lmAlbumIt__media__20C1E124">
+    <End Role="lmMediaType" Type="Self.lmMediaType" Multiplicity="1" />
+    <End Role="lmAlbumItem" Type="Self.lmAlbumItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmMediaType">
+        <PropertyRef Name="mediaTypeID" />
+      </Principal>
+      <Dependent Role="lmAlbumItem">
+        <PropertyRef Name="mediaTypeIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LifesMomentsDBEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="lmAlbums" EntityType="Self.lmAlbum" />
+    <EntitySet Name="lmAlbumItems" EntityType="Self.lmAlbumItem" />
+    <EntitySet Name="lmMediaTypes" EntityType="Self.lmMediaType" />
+    <EntitySet Name="lmUsers" EntityType="Self.lmUser" />
+    <AssociationSet Name="FK__lmAlbum__userIDF__1DE57479" Association="Self.FK__lmAlbum__userIDF__1DE57479">
+      <End Role="lmUser" EntitySet="lmUsers" />
+      <End Role="lmAlbum" EntitySet="lmAlbums" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lmAlbumIt__album__21B6055D" Association="Self.FK__lmAlbumIt__album__21B6055D">
+      <End Role="lmAlbum" EntitySet="lmAlbums" />
+      <End Role="lmAlbumItem" EntitySet="lmAlbumItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lmAlbumIt__media__20C1E124" Association="Self.FK__lmAlbumIt__media__20C1E124">
+      <End Role="lmMediaType" EntitySet="lmMediaTypes" />
+      <End Role="lmAlbumItem" EntitySet="lmAlbumItems" />
+    </AssociationSet>
+    <FunctionImport Name="sp_CreatelmAlbum">
+      <Parameter Name="albumDescription" Mode="In" Type="String" />
+      <Parameter Name="albumDate" Mode="In" Type="DateTime" />
+      <Parameter Name="userIDFK" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CreatelmMediaType">
+      <Parameter Name="mediaTypeDescription" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeletelmAlbum">
+      <Parameter Name="albumID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeletelmAlbumItem">
+      <Parameter Name="albumItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeletelmMediaType">
+      <Parameter Name="mediaTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeletelmUser">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_LogErrors">
+      <Parameter Name="userIDFK" Mode="In" Type="Int32" />
+      <Parameter Name="sp_Name" Mode="In" Type="String" />
+      <Parameter Name="errorDescription" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReadlmAlbum" ReturnType="Collection(LifesMomentsDBModel.sp_ReadlmAlbum_Result)">
+      <Parameter Name="albumID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReadlmAlbumItem" ReturnType="Collection(LifesMomentsDBModel.sp_ReadlmAlbumItem_Result)">
+      <Parameter Name="albumItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReadlmMediaType" ReturnType="Collection(LifesMomentsDBModel.sp_ReadlmMediaType_Result)">
+      <Parameter Name="mediaTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ReadlmUser" ReturnType="Collection(LifesMomentsDBModel.sp_ReadlmUser_Result)">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SavelmAlbumItems">
+      <Parameter Name="albumIDFK" Mode="In" Type="Int32" />
+      <Parameter Name="albumItemDescription" Mode="In" Type="String" />
+      <Parameter Name="albumItemLocation" Mode="In" Type="String" />
+      <Parameter Name="albumItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SavelmUser">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+      <Parameter Name="firstName" Mode="In" Type="String" />
+      <Parameter Name="lastName" Mode="In" Type="String" />
+      <Parameter Name="emailAddress" Mode="In" Type="String" />
+      <Parameter Name="userPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatelmAlbum">
+      <Parameter Name="albumID" Mode="In" Type="Int32" />
+      <Parameter Name="albumDescription" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdatelmMediaType">
+      <Parameter Name="mediaTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="mediaTypeDescription" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_ReadlmAlbum_Result">
+    <Property Type="String" Name="albumDescription" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="albumDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="firstName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_ReadlmAlbumItem_Result">
+    <Property Type="String" Name="albumItemDescription" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="mediaTypeDescription" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="albumDescription" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="albumDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_ReadlmMediaType_Result">
+    <Property Type="Int32" Name="mediaTypeID" Nullable="false" />
+    <Property Type="String" Name="mediaTypeDescription" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_ReadlmUser_Result">
+    <Property Type="String" Name="firstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="lastName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="emailAddress" Nullable="false" MaxLength="100" />
+  </ComplexType>
+</Schema>

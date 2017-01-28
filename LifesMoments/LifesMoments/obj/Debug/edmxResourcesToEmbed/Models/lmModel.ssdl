@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LifesMomentsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="lmAlbum">
+    <Key>
+      <PropertyRef Name="albumID" />
+    </Key>
+    <Property Name="albumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="albumDescription" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="albumDate" Type="datetime" Nullable="false" />
+    <Property Name="userIDFK" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lmAlbumItem">
+    <Key>
+      <PropertyRef Name="albumItemID" />
+    </Key>
+    <Property Name="albumItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="albumItemDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="albumItemLocation" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="mediaTypeIDFK" Type="int" Nullable="false" />
+    <Property Name="albumIDFK" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lmMediaType">
+    <Key>
+      <PropertyRef Name="mediaTypeID" />
+    </Key>
+    <Property Name="mediaTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mediaTypeDescription" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lmUser">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emailAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="userPassword" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__lmAlbum__userIDF__1DE57479">
+    <End Role="lmUser" Type="Self.lmUser" Multiplicity="1" />
+    <End Role="lmAlbum" Type="Self.lmAlbum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmUser">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="lmAlbum">
+        <PropertyRef Name="userIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lmAlbumIt__album__21B6055D">
+    <End Role="lmAlbum" Type="Self.lmAlbum" Multiplicity="1" />
+    <End Role="lmAlbumItem" Type="Self.lmAlbumItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmAlbum">
+        <PropertyRef Name="albumID" />
+      </Principal>
+      <Dependent Role="lmAlbumItem">
+        <PropertyRef Name="albumIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lmAlbumIt__media__20C1E124">
+    <End Role="lmMediaType" Type="Self.lmMediaType" Multiplicity="1" />
+    <End Role="lmAlbumItem" Type="Self.lmAlbumItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lmMediaType">
+        <PropertyRef Name="mediaTypeID" />
+      </Principal>
+      <Dependent Role="lmAlbumItem">
+        <PropertyRef Name="mediaTypeIDFK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_CreatelmAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumDescription" Type="varchar" Mode="In" />
+    <Parameter Name="albumDate" Type="datetime" Mode="In" />
+    <Parameter Name="userIDFK" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_CreatelmMediaType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mediaTypeDescription" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_DeletelmAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeletelmAlbumItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeletelmMediaType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mediaTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DeletelmUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_LogErrors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userIDFK" Type="int" Mode="In" />
+    <Parameter Name="sp_Name" Type="varchar" Mode="In" />
+    <Parameter Name="errorDescription" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_ReadlmAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ReadlmAlbumItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ReadlmMediaType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mediaTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ReadlmUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SavelmAlbumItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumIDFK" Type="int" Mode="In" />
+    <Parameter Name="albumItemDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="albumItemLocation" Type="nvarchar" Mode="In" />
+    <Parameter Name="albumItemID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SavelmUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+    <Parameter Name="firstName" Type="varchar" Mode="In" />
+    <Parameter Name="lastName" Type="varchar" Mode="In" />
+    <Parameter Name="emailAddress" Type="varchar" Mode="In" />
+    <Parameter Name="userPassword" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdatelmAlbum" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="albumID" Type="int" Mode="In" />
+    <Parameter Name="albumDescription" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdatelmMediaType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mediaTypeID" Type="int" Mode="In" />
+    <Parameter Name="mediaTypeDescription" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="LifesMomentsDBModelStoreContainer">
+    <EntitySet Name="lmAlbum" EntityType="Self.lmAlbum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lmAlbumItem" EntityType="Self.lmAlbumItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lmMediaType" EntityType="Self.lmMediaType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lmUser" EntityType="Self.lmUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__lmAlbum__userIDF__1DE57479" Association="Self.FK__lmAlbum__userIDF__1DE57479">
+      <End Role="lmUser" EntitySet="lmUser" />
+      <End Role="lmAlbum" EntitySet="lmAlbum" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lmAlbumIt__album__21B6055D" Association="Self.FK__lmAlbumIt__album__21B6055D">
+      <End Role="lmAlbum" EntitySet="lmAlbum" />
+      <End Role="lmAlbumItem" EntitySet="lmAlbumItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lmAlbumIt__media__20C1E124" Association="Self.FK__lmAlbumIt__media__20C1E124">
+      <End Role="lmMediaType" EntitySet="lmMediaType" />
+      <End Role="lmAlbumItem" EntitySet="lmAlbumItem" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

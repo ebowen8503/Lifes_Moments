@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LifesMomentsDBModelStoreContainer" CdmEntityContainer="LifesMomentsDBEntities3">
+    <EntitySetMapping Name="lmAlbums">
+      <EntityTypeMapping TypeName="LifesMomentsDBModel.lmAlbum">
+        <MappingFragment StoreEntitySet="lmAlbum">
+          <ScalarProperty Name="albumID" ColumnName="albumID" />
+          <ScalarProperty Name="albumDescription" ColumnName="albumDescription" />
+          <ScalarProperty Name="albumDate" ColumnName="albumDate" />
+          <ScalarProperty Name="userIDFK" ColumnName="userIDFK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lmAlbumItems">
+      <EntityTypeMapping TypeName="LifesMomentsDBModel.lmAlbumItem">
+        <MappingFragment StoreEntitySet="lmAlbumItem">
+          <ScalarProperty Name="albumItemID" ColumnName="albumItemID" />
+          <ScalarProperty Name="albumItemDescription" ColumnName="albumItemDescription" />
+          <ScalarProperty Name="albumItemLocation" ColumnName="albumItemLocation" />
+          <ScalarProperty Name="mediaTypeIDFK" ColumnName="mediaTypeIDFK" />
+          <ScalarProperty Name="albumIDFK" ColumnName="albumIDFK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lmMediaTypes">
+      <EntityTypeMapping TypeName="LifesMomentsDBModel.lmMediaType">
+        <MappingFragment StoreEntitySet="lmMediaType">
+          <ScalarProperty Name="mediaTypeID" ColumnName="mediaTypeID" />
+          <ScalarProperty Name="mediaTypeDescription" ColumnName="mediaTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="lmUsers">
+      <EntityTypeMapping TypeName="LifesMomentsDBModel.lmUser">
+        <MappingFragment StoreEntitySet="lmUser">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_CreatelmAlbum" FunctionName="LifesMomentsDBModel.Store.sp_CreatelmAlbum" />
+    <FunctionImportMapping FunctionImportName="sp_CreatelmMediaType" FunctionName="LifesMomentsDBModel.Store.sp_CreatelmMediaType" />
+    <FunctionImportMapping FunctionImportName="sp_DeletelmAlbum" FunctionName="LifesMomentsDBModel.Store.sp_DeletelmAlbum" />
+    <FunctionImportMapping FunctionImportName="sp_DeletelmAlbumItem" FunctionName="LifesMomentsDBModel.Store.sp_DeletelmAlbumItem" />
+    <FunctionImportMapping FunctionImportName="sp_DeletelmMediaType" FunctionName="LifesMomentsDBModel.Store.sp_DeletelmMediaType" />
+    <FunctionImportMapping FunctionImportName="sp_DeletelmUser" FunctionName="LifesMomentsDBModel.Store.sp_DeletelmUser" />
+    <FunctionImportMapping FunctionImportName="sp_LogErrors" FunctionName="LifesMomentsDBModel.Store.sp_LogErrors" />
+    <FunctionImportMapping FunctionImportName="sp_ReadlmAlbum" FunctionName="LifesMomentsDBModel.Store.sp_ReadlmAlbum">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LifesMomentsDBModel.sp_ReadlmAlbum_Result">
+          <ScalarProperty Name="albumDescription" ColumnName="albumDescription" />
+          <ScalarProperty Name="albumDate" ColumnName="albumDate" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ReadlmAlbumItem" FunctionName="LifesMomentsDBModel.Store.sp_ReadlmAlbumItem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LifesMomentsDBModel.sp_ReadlmAlbumItem_Result">
+          <ScalarProperty Name="albumItemDescription" ColumnName="albumItemDescription" />
+          <ScalarProperty Name="mediaTypeDescription" ColumnName="mediaTypeDescription" />
+          <ScalarProperty Name="albumDescription" ColumnName="albumDescription" />
+          <ScalarProperty Name="albumDate" ColumnName="albumDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ReadlmMediaType" FunctionName="LifesMomentsDBModel.Store.sp_ReadlmMediaType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LifesMomentsDBModel.sp_ReadlmMediaType_Result">
+          <ScalarProperty Name="mediaTypeID" ColumnName="mediaTypeID" />
+          <ScalarProperty Name="mediaTypeDescription" ColumnName="mediaTypeDescription" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ReadlmUser" FunctionName="LifesMomentsDBModel.Store.sp_ReadlmUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LifesMomentsDBModel.sp_ReadlmUser_Result">
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SavelmAlbumItems" FunctionName="LifesMomentsDBModel.Store.sp_SavelmAlbumItems" />
+    <FunctionImportMapping FunctionImportName="sp_SavelmUser" FunctionName="LifesMomentsDBModel.Store.sp_SavelmUser" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatelmAlbum" FunctionName="LifesMomentsDBModel.Store.sp_UpdatelmAlbum" />
+    <FunctionImportMapping FunctionImportName="sp_UpdatelmMediaType" FunctionName="LifesMomentsDBModel.Store.sp_UpdatelmMediaType" />
+  </EntityContainerMapping>
+</Mapping>
