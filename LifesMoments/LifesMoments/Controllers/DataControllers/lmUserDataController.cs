@@ -111,7 +111,7 @@ namespace LifesMoments.Controllers.DataControllers
             userModel currentUser = new userModel();
 
             ///uses read procedure by login properties and returns corresponding user
-            DbCommand get_Login = db.GetStoredProcCommand("sp_readct2LoginUser");
+            DbCommand get_Login = db.GetStoredProcCommand("sp_ReadlmLoginUser");
             db.AddInParameter(get_Login, "@emailAddress", DbType.String, login.emailAddress);
             db.AddInParameter(get_Login, "@userPassword", DbType.String, login.userPassword);
             DataSet ds = db.ExecuteDataSet(get_Login);

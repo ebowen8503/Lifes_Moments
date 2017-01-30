@@ -44,8 +44,7 @@ namespace LifesMoments.Controllers.DataControllers
                              {
                                  albumItemID = drRow.Field<int>("albumItemID"),
                                  albumItemDescription = drRow.Field<string>("albumItemDescription"),
-                                 albumDate = drRow.Field<DateTime>("albumDate"),
-                                 userIDFK = drRow.Field<int>("userIDFK"),
+                                 
 
                              }).ToList();
             return albumItemData;
@@ -56,8 +55,7 @@ namespace LifesMoments.Controllers.DataControllers
             DbCommand create_AlbumItem = db.GetStoredProcCommand("sp_SavelmAlbumItem");
             db.AddInParameter(create_AlbumItem, "@albumItemID", DbType.Int32, currentAlbumItem.albumItemID);
             db.AddInParameter(create_AlbumItem, "@albumItemDescription", DbType.String, currentAlbumItem.albumItemDescription);
-            db.AddInParameter(create_AlbumItem, "@albumDate", DbType.DateTime, currentAlbumItem.albumDate);
-            db.AddInParameter(create_AlbumItem, "@userIDFK", DbType.Int32, currentAlbumItem.userIDFK);
+            
 
             db.ExecuteNonQuery(create_AlbumItem);
 
@@ -72,8 +70,7 @@ namespace LifesMoments.Controllers.DataControllers
 
             db.AddInParameter(update_AlbumItem, "@albumItemID", DbType.Int32, selectedAlbumItem.albumItemID);
             db.AddInParameter(update_AlbumItem, "@albumItemDescription", DbType.String, selectedAlbumItem.albumItemDescription);
-            db.AddInParameter(update_AlbumItem, "@albumDate", DbType.DateTime, selectedAlbumItem.albumDate);
-            db.AddInParameter(update_AlbumItem, "@userIDFK", DbType.Int32, selectedAlbumItem.userIDFK);
+            
 
             success = Convert.ToBoolean(update_AlbumItem.ExecuteNonQuery());
 

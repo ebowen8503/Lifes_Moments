@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace LifesMoments.Controllers
 {
-    public class HomeController : Controller
+    public class ScrapbookController : Controller
     {
-        public ActionResult Index()
+        // GET: Scrapbook
+        public ActionResult scrapbookHome()
         {
             return View();
         }
-
     }
 }
