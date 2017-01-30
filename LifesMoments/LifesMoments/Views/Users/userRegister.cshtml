@@ -1,11 +1,12 @@
 ﻿@model LifesMoments.Models.userModel
 @{
     ViewBag.Title = "userRegister";
+
 }
 
 <h2>Register</h2>
 
-@using (Html.BeginForm("Register", "Users", FormMethod.Post))
+@using (Html.BeginForm("saveData", "Users", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <hr>
@@ -40,15 +41,13 @@
                 @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-md-offset-1 col-md-5">
-                <input id="RegisterButton" type="submit" value="Register">
-                <input id="CancelButton" type="submit" value="Cancel">
+                <button type ="button" onclick="location.href='@Url.Action("scrapbookHome","Scrapbook")'"> Register </button>
+                <button type="button"  onclick="location.href='@Url.Action("Index","Home")'">Cancel </button>
             </div>
         </div>
     </div>
 }
-
-
-
 

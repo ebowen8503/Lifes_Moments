@@ -61,22 +61,21 @@ namespace LifesMoments.Controllers
         }
 
         //POST: /Users/userRegister
-        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Register(FormCollection register)
+        public ActionResult saveData(userModel currentUser)
         {
             userModel usModel = new userModel();
-            lmUserDataController currentUser = new lmUserDataController("");
 
+            string firstNameFromModel = usModel.firstName;
+            string firstNameFromRequest = Request.Form["firstName"];
+            string lastNameFromModel = usModel.lastName;
+            string lastNameFromRequest = Request.Form["lastName"];
+            string emailAddressFromModel = usModel.emailAddress;
+            string emailAddressFromRequest = Request.Form["emailAddress"];
+            string userPasswordFromModel = usModel.userPassword;
+            string userPasswordFromRequest = Request.Form["userPassword"];
 
-            usModel.firstName = register["userModel.firstName"].ToString(); ;
-            usModel.lastName = register["userModel.lastName"].ToString();
-            usModel.emailAddress = register["userModel.emailAddress"].ToString();
-            usModel.userPassword = register["userModel.userPassword"].ToString();
-
-            usModel = currentUser.CreateUser(usModel);
-
-            return Register(currentUser);
+            return saveData(currentUser);
         }
 
         public ActionResult Register(userModel currentUser)
