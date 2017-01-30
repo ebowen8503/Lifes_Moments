@@ -44,6 +44,9 @@ namespace LifesMoments.Controllers.DataControllers
                              {
                                  albumItemID = drRow.Field<int>("albumItemID"),
                                  albumItemDescription = drRow.Field<string>("albumItemDescription"),
+                                 albumItemLocation= drRow.Field<string>("albumItemLocation"),
+                                 mediaTypeDescription = drRow.Field<string>("mediaTypeDescription"),
+
                                  
 
                              }).ToList();
@@ -55,7 +58,8 @@ namespace LifesMoments.Controllers.DataControllers
             DbCommand create_AlbumItem = db.GetStoredProcCommand("sp_SavelmAlbumItem");
             db.AddInParameter(create_AlbumItem, "@albumItemID", DbType.Int32, currentAlbumItem.albumItemID);
             db.AddInParameter(create_AlbumItem, "@albumItemDescription", DbType.String, currentAlbumItem.albumItemDescription);
-            
+            db.AddInParameter(create_AlbumItem, "@albumItemLocation", DbType.String, currentAlbumItem.albumItemLocation);
+            db.AddInParameter(create_AlbumItem, "@mediaTypeDescription", DbType.String, currentAlbumItem.mediaTypeDescription);
 
             db.ExecuteNonQuery(create_AlbumItem);
 
@@ -70,7 +74,8 @@ namespace LifesMoments.Controllers.DataControllers
 
             db.AddInParameter(update_AlbumItem, "@albumItemID", DbType.Int32, selectedAlbumItem.albumItemID);
             db.AddInParameter(update_AlbumItem, "@albumItemDescription", DbType.String, selectedAlbumItem.albumItemDescription);
-            
+            db.AddInParameter(update_AlbumItem, "@albumItemLocation", DbType.String, selectedAlbumItem.albumItemLocation);
+            db.AddInParameter(update_AlbumItem, "@mediaTypeDescription", DbType.String, selectedAlbumItem.mediaTypeDescription);
 
             success = Convert.ToBoolean(update_AlbumItem.ExecuteNonQuery());
 

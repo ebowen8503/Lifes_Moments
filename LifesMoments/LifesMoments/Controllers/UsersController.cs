@@ -78,24 +78,5 @@ namespace LifesMoments.Controllers
             return saveData(currentUser);
         }
 
-        public ActionResult Register(userModel currentUser)
-        {
-            if (currentUser == null)
-            {
-                return View("scrapbookHome");
-            }
-            else
-
-            {
-                return View("Home");
-
-            }
-
-
-
-        }
-
-
-
     }
 }
